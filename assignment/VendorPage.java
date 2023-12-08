@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.registrationpage;
+package javagrpassignment;
+
+import java.io.*;
 
 /**
  *
@@ -15,8 +17,15 @@ public class VendorPage extends javax.swing.JFrame {
      */
     public VendorPage() {
         initComponents();
-    }
+        this.setTitle("Home Page");
+        setLocationRelativeTo(null);
+        }
 
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,6 +42,7 @@ public class VendorPage extends javax.swing.JFrame {
         VLogOutbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 102));
 
@@ -57,8 +67,18 @@ public class VendorPage extends javax.swing.JFrame {
         );
 
         VOrderbtn.setText("Accept/Cancel Order");
+        VOrderbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VOrderbtnActionPerformed(evt);
+            }
+        });
 
         VMenubtn.setText("Menu Management");
+        VMenubtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VMenubtnActionPerformed(evt);
+            }
+        });
 
         VLogOutbtn.setText("Log Out");
 
@@ -94,6 +114,64 @@ public class VendorPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void VOrderbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VOrderbtnActionPerformed
+        // Open VendorOrerDetails
+        VendorOrderDetails page2 = new VendorOrderDetails();
+        //VendorOrderDetails.setLocationRelativeTo(null); // Center Page2 on screen
+        page2.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_VOrderbtnActionPerformed
+
+    private void VMenubtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VMenubtnActionPerformed
+        // TODO add your handling code here:
+        createMenuFile();
+              
+        VendorMenu page3 = new VendorMenu();
+        page3.setVisible(true);
+        
+        this.setVisible(false);
+    }
+      private void createMenuFile() {
+        File file = new File("C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment/menu_details.txt");
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+          // Assuming vendor details are stored in another file
+        File vendorDetailsFile = new File("C:\\Path\\To\\VendorDetails.txt");
+
+        try (FileReader fr = new FileReader(vendorDetailsFile);
+             BufferedReader br = new BufferedReader(fr);
+             FileWriter writer = new FileWriter(file)) {
+
+            // Assuming vendor ID is in the first column of the vendor details file
+            // and vendor name is in the second column
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] vendorDetails = line.split("\t"); // Assuming tab-separated values
+
+                // Writing to the menu file: Vendor ID, Vendor Name, String Variable, Int Variable
+                writer.write(vendorDetails[0] + "\t"); // Vendor ID
+                writer.write(vendorDetails[1] + "\t"); // Vendor Name
+
+                // Add your string variable here
+                writer.write("YourStringValue" + "\t");
+
+                // Add your int variable here
+                writer.write("123" + "\n"); // Example integer value, replace with your variable
+            }
+        }catch (IOException e) {
+        e.printStackTrace();
+        
+        }
+    }//GEN-LAST:event_VMenubtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -122,10 +200,8 @@ public class VendorPage extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VendorPage().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new VendorPage().setVisible(true);
         });
     }
 
