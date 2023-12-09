@@ -5,27 +5,22 @@
 package javagrpassignment;
 
 import java.io.*;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Yanaal
  */
 public class VendorPage extends javax.swing.JFrame {
-
-    /**
-     * Creates new form VendorPage
-     */
-    public VendorPage() {
+    private String userID;
+ 
+    public VendorPage(String userID) {
         initComponents();
         this.setTitle("Home Page");
         setLocationRelativeTo(null);
+        this.userID = userID;
         }
 
-    
-    
-    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,6 +76,11 @@ public class VendorPage extends javax.swing.JFrame {
         });
 
         VLogOutbtn.setText("Log Out");
+        VLogOutbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VLogOutbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,18 +116,17 @@ public class VendorPage extends javax.swing.JFrame {
 
     private void VOrderbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VOrderbtnActionPerformed
         // Open VendorOrerDetails
-        VendorOrderDetails page2 = new VendorOrderDetails();
-        //VendorOrderDetails.setLocationRelativeTo(null); // Center Page2 on screen
+        VendorOrderDetails page2 = new VendorOrderDetails(userID);
         page2.setVisible(true);
-        
         this.setVisible(false);
+       
     }//GEN-LAST:event_VOrderbtnActionPerformed
 
     private void VMenubtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VMenubtnActionPerformed
         // TODO add your handling code here:
         createMenuFile();
               
-        VendorMenu page3 = new VendorMenu();
+        VendorMenu page3 = new VendorMenu(userID);
         page3.setVisible(true);
         
         this.setVisible(false);
@@ -144,7 +143,7 @@ public class VendorPage extends javax.swing.JFrame {
         }
         
           // Assuming vendor details are stored in another file
-        File vendorDetailsFile = new File("C:\\Path\\To\\VendorDetails.txt");
+        File vendorDetailsFile = new File("C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment\\password.txt");
 
         try (FileReader fr = new FileReader(vendorDetailsFile);
              BufferedReader br = new BufferedReader(fr);
@@ -154,11 +153,11 @@ public class VendorPage extends javax.swing.JFrame {
             // and vendor name is in the second column
             String line;
             while ((line = br.readLine()) != null) {
-                String[] vendorDetails = line.split("\t"); // Assuming tab-separated values
+                String[] vendorDetails = line.split(", "); // Assuming tab-separated values
 
                 // Writing to the menu file: Vendor ID, Vendor Name, String Variable, Int Variable
-                writer.write(vendorDetails[0] + "\t"); // Vendor ID
-                writer.write(vendorDetails[1] + "\t"); // Vendor Name
+                writer.write(vendorDetails[1] + "\t"); // Vendor ID
+                writer.write(vendorDetails[0] + "\t"); // Vendor Name
 
                 // Add your string variable here
                 writer.write("YourStringValue" + "\t");
@@ -172,38 +171,63 @@ public class VendorPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_VMenubtnActionPerformed
 
+    private void VLogOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VLogOutbtnActionPerformed
+        // TODO add your handling code here:
+                Login a =new Login();
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_VLogOutbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(VendorPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(VendorPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(VendorPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(VendorPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+    //</editor-fold>
+
+    /* Create and display the form */
+ java.awt.EventQueue.invokeLater(() -> {
+            // Create an instance of Login to obtain the user ID
+            Login login = new Login();
+            login.setVisible(true);
+
+            // Wait for the login to be completed
+            while (!login.isLoginComplete()) {
+                try {
+                    Thread.sleep(100); // Sleep for 100 milliseconds
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VendorPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VendorPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VendorPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VendorPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new VendorPage().setVisible(true);
-        });
-    }
+            // Get the logged-in user ID from the login page
+            String loggedInUserID = login.getLoggedInUserID();
+
+            // Create an instance of VendorPage with the obtained user ID
+            VendorPage vendorPage = new VendorPage(loggedInUserID);
+            vendorPage.setVisible(true);
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton VLogOutbtn;

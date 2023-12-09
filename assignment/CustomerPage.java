@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.registrationpage;
+package javagrpassignment;
 
 /**
  *
@@ -64,6 +64,11 @@ public class CustomerPage extends javax.swing.JFrame {
         CustMenubtn.setText("Menu");
 
         CustLogOutbtn.setText("Log Out");
+        CustLogOutbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustLogOutbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,6 +105,13 @@ public class CustomerPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CustLogOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustLogOutbtnActionPerformed
+        // TODO add your handling code here:
+                Login a =new Login();
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_CustLogOutbtnActionPerformed
 
     /**
      * @param args the command line arguments
