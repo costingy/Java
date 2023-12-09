@@ -4,10 +4,15 @@
  */
 package assignment;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -54,16 +59,19 @@ public class Register extends javax.swing.JFrame
         jPanel5 = new javax.swing.JPanel();
         jTFNameRegister = new javax.swing.JTextField();
         JBRegisterUser = new javax.swing.JButton();
+        jBDeleteUser = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         JTFIDReg = new javax.swing.JTextField();
         JBUpdateUser = new javax.swing.JButton();
+        JBShowUser = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         JTFPasswordReg = new javax.swing.JTextField();
-        jBDeleteUser = new javax.swing.JButton();
+        JBsave = new javax.swing.JButton();
+        JBClearUser = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -113,6 +121,15 @@ public class Register extends javax.swing.JFrame
             }
         });
 
+        jBDeleteUser.setText("delete user");
+        jBDeleteUser.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jBDeleteUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -121,7 +138,9 @@ public class Register extends javax.swing.JFrame
                 .addComponent(jTFNameRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(JBRegisterUser)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jBDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +148,8 @@ public class Register extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFNameRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBRegisterUser))
+                    .addComponent(JBRegisterUser)
+                    .addComponent(jBDeleteUser))
                 .addGap(22, 22, 22))
         );
 
@@ -164,6 +184,15 @@ public class Register extends javax.swing.JFrame
             }
         });
 
+        JBShowUser.setText("show User");
+        JBShowUser.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                JBShowUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -172,14 +201,17 @@ public class Register extends javax.swing.JFrame
                 .addComponent(JTFIDReg, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addComponent(JBUpdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 200, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(JBShowUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 85, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JTFIDReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBUpdateUser))
+                    .addComponent(JBUpdateUser)
+                    .addComponent(JBShowUser))
                 .addGap(0, 28, Short.MAX_VALUE))
         );
 
@@ -205,12 +237,21 @@ public class Register extends javax.swing.JFrame
             }
         });
 
-        jBDeleteUser.setText("delete user");
-        jBDeleteUser.addActionListener(new java.awt.event.ActionListener()
+        JBsave.setText("save");
+        JBsave.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jBDeleteUserActionPerformed(evt);
+                JBsaveActionPerformed(evt);
+            }
+        });
+
+        JBClearUser.setText("Clear");
+        JBClearUser.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                JBClearUserActionPerformed(evt);
             }
         });
 
@@ -221,19 +262,20 @@ public class Register extends javax.swing.JFrame
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addComponent(JTFPasswordReg, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(jBDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(JBsave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JBClearUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JTFPasswordReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jBDeleteUser)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(JBsave)
+                    .addComponent(JBClearUser))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel9);
@@ -271,10 +313,82 @@ public class Register extends javax.swing.JFrame
         JTFIDReg.setText(""); 
         
         JTFPasswordReg.setText("");
-}
+    }
+    
+    public void WriteFiles(String files,boolean m)
+    {
+         try
+        {
+           FileWriter fw = new FileWriter(files, m);
+            
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            for(int i= 0; i<JTPasswordTable.getRowCount(); i++)//rows
+            {
+                  
+                for(int j =0; j<JTPasswordTable.getColumnCount();j++)
+                {
+                    
+                    bw.write(JTPasswordTable.getValueAt(i, j).toString()+", ");
+                
+                
+                      
+                }
+                bw.newLine();
+            }
+            
+            
+            bw.close();
+            fw.close();
+            
+        } 
+        catch (IOException ex)
+        {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void ReadFiles(String l)
+    {
+        
+      FileReader fr = null;
+       
+        try
+        {
+            fr = new FileReader(l);
+           BufferedReader br = new BufferedReader(fr);
+           
+           DefaultTableModel model2 =(DefaultTableModel)JTPasswordTable.getModel();
+           
+           Object[] lines = br.lines().toArray();
+           
+           for(int i =0; i<lines.length;i++)
+           {
+               String[] row=lines[i].toString().split(" ");
+              
+                  // Replace commas with an empty string in each element of the row
+            for (int j = 0; j < row.length; j++) {
+                row[j] = row[j].replace(",", "");
+            }
+               
+               
+                
+               model.addRow(row);
+           }
+        } 
+        
+        catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+     
+        
+    }
+    
     private void jTFNameRegisterActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTFNameRegisterActionPerformed
     {//GEN-HEADEREND:event_jTFNameRegisterActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTFNameRegisterActionPerformed
 
     private void JTFIDRegActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_JTFIDRegActionPerformed
@@ -294,8 +408,11 @@ public class Register extends javax.swing.JFrame
         String ID = JTFIDReg.getText();
 
         String password = JTFPasswordReg.getText();
-        
-           if( ID.length() == 0 || name.length() == 0|| ID.length() == 0|| password.length() == 0)
+       if(name.contains(",")||ID.contains(",")||password.contains(","))
+       {
+           JOptionPane.showMessageDialog(this, "Please avoid using commas in your input!");
+       }
+      else if( ID.length() == 0 || name.length() == 0|| ID.length() == 0|| password.length() == 0)
       {
           JOptionPane.showMessageDialog(this,"Pleae fill up the form!");
       }
@@ -307,7 +424,10 @@ public class Register extends javax.swing.JFrame
       }
         
         
-        clearTextField();
+    
+        
+     
+    
     }//GEN-LAST:event_JBRegisterUserActionPerformed
 
     private void JTPasswordTableMouseReleased(java.awt.event.MouseEvent evt)                                      
@@ -330,44 +450,52 @@ public class Register extends javax.swing.JFrame
         JTFIDReg.setText(id); 
         
         JTFPasswordReg.setText(Name);
-        
-     
+  
       
     } 
     
     private void JBUpdateUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_JBUpdateUserActionPerformed
     {//GEN-HEADEREND:event_JBUpdateUserActionPerformed
             if(row == -1)
-        {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete!");
-        }
-        else{
-      String name =  jTFNameRegister.getText();
+            {
+                JOptionPane.showMessageDialog(this, "Please select a row to delete!");
+            }
+             else{
+                    String name =  jTFNameRegister.getText();
        
-      String id = JTFIDReg.getText();
+                    String id = JTFIDReg.getText();
        
-      String password =  JTFPasswordReg.getText();
+                    String password =  JTFPasswordReg.getText();
        
-
+                     model.setValueAt(name, row, 0);
+                        
+                     model.setValueAt(id, row, 1);
       
-    
-      
-      model.setValueAt(name, row, 0);
-      model.setValueAt(id, row, 1);
-      model.setValueAt(password, row, 2);
+                     model.setValueAt(password, row, 2);
   
+                     model.removeRow(row);
       
-       model.removeRow(row);
-      
-      String[] value = {name,id, password};
+     
+                     String[] value = {name,id, password};
        
-      model.insertRow(row, value);
       
-      clearTextField();
+                     model.insertRow(row, value);
       
-      row = -1; 
       
-    }   
+                     clearTextField();
+      
+     
+                     row = -1; 
+                } 
+            
+            
+            
+               WriteFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt",false);
+         
+               WriteFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\credit.txt",false);
+         
+         
+   
     }//GEN-LAST:event_JBUpdateUserActionPerformed
 
     private void jBDeleteUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jBDeleteUserActionPerformed
@@ -384,7 +512,42 @@ public class Register extends javax.swing.JFrame
          row = -1;
          
         }
+          
+         WriteFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt",false);
+         
+          WriteFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\credit.txt",false);
+   
     }//GEN-LAST:event_jBDeleteUserActionPerformed
+
+    private void JBShowUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_JBShowUserActionPerformed
+    {//GEN-HEADEREND:event_JBShowUserActionPerformed
+        DefaultTableModel model4 = (DefaultTableModel) JTPasswordTable.getModel();
+        model4.setRowCount(0);
+        
+        ReadFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt");
+ 
+
+    }//GEN-LAST:event_JBShowUserActionPerformed
+
+    private void JBsaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_JBsaveActionPerformed
+    {//GEN-HEADEREND:event_JBsaveActionPerformed
+         //write to password
+        
+       WriteFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt",true);
+        
+        //write to student credit
+      WriteFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\credit.txt",true);
+      
+       DefaultTableModel model3 = (DefaultTableModel) JTPasswordTable.getModel();
+        model3.setRowCount(0);
+      
+    }//GEN-LAST:event_JBsaveActionPerformed
+
+    private void JBClearUserActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_JBClearUserActionPerformed
+    {//GEN-HEADEREND:event_JBClearUserActionPerformed
+        DefaultTableModel model3 = (DefaultTableModel) JTPasswordTable.getModel();
+        model3.setRowCount(0);
+    }//GEN-LAST:event_JBClearUserActionPerformed
 
     
     public static void main(String args[])
@@ -427,8 +590,11 @@ public class Register extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBClearUser;
     private javax.swing.JButton JBRegisterUser;
+    private javax.swing.JButton JBShowUser;
     private javax.swing.JButton JBUpdateUser;
+    private javax.swing.JButton JBsave;
     private javax.swing.JTextField JTFIDReg;
     private javax.swing.JTextField JTFPasswordReg;
     private javax.swing.JTable JTPasswordTable;
