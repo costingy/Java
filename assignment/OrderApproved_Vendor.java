@@ -9,7 +9,7 @@ package javagrpassignment;
  * @author baigs
  */
 public class OrderApproved_Vendor extends javax.swing.JFrame {
-
+    private String userID; 
     /**
      * Creates new form OrderApproved_Vendor
      */
@@ -111,7 +111,7 @@ public class OrderApproved_Vendor extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        VendorOrderDetails page8 = new VendorOrderDetails();
+        VendorOrderDetails page8 = new VendorOrderDetails(userID);
         
        page8.setVisible(true);
        

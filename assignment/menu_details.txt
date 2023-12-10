@@ -1,5 +1,13 @@
 cu123456	Yang	YourStringValue	123
-cu123456	Yang	YourStringValue	123
 ad123456	Jas	YourStringValue	123
 dm123456	Ken	YourStringValue	123
 vd178345	Smitch	YourStringValue	123
+vd173345	Mitch	YourStringValue	123
+vd178999	Dave	YourStringValue	123
+vd178888	Stupid	YourStringValue	123
+
+vd173345		Fried Chicken	18
+vd173345		Chicken	10
+vd173345		Rice	10
+vd173345		Curry	3
+vd173345		Pizza	15

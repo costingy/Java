@@ -22,21 +22,12 @@ public class Login extends javax.swing.JFrame
     private final ArrayList<String[]> idPasswordList;
     private boolean matchFound;
     
-    private boolean loginComplete;
-    public boolean isLoginComplete() {
-        return loginComplete;
-    }
-
        public static void main(String[] args) {
-    
+        // This is the entry point of your program
+        // You can create an instance of your Login class and make it visible
         java.awt.EventQueue.invokeLater(() -> {
-            Login login = new Login();
-        login.setVisible(true);
-
-        login.jBLogin.addActionListener((evt) -> {
-            String loggedInUserID = login.handleLogin();
+            new Login().setVisible(true);
         });
-       });
     }
     public Login()
     {
@@ -201,10 +192,10 @@ public class Login extends javax.swing.JFrame
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jBLoginActionPerformed
     {//GEN-HEADEREND:event_jBLoginActionPerformed
-    String userType = "";
+ String userType = "";
     String userID = "";
     String Passkey = JTFUserID.getText() + "," + JTfPassword.getText();
-    
+
     File f = new File("C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment\\password.txt");
 
     try (BufferedReader br = new BufferedReader(new FileReader(f))) {
@@ -262,8 +253,7 @@ public class Login extends javax.swing.JFrame
                     break;
                 case "vd":
                     // Open vendor page with the user ID
-                    VendorPage vendorPage = new VendorPage();
-                    vendorPage.setUserID(loggedInUserID);
+                    VendorPage vendorPage = new VendorPage(userID);
                     vendorPage.setVisible(true);
                     break;
                 default:
@@ -271,15 +261,10 @@ public class Login extends javax.swing.JFrame
                     System.out.println("Unknown user type");
                     break;
             }
-           
-            loginComplete = true;
-            
+            // Close the current login page
             this.setVisible(false);
         }
-    }
-        private String handleLogin() {
-        jBLoginActionPerformed(null);
-        return loggedInUserID;
+
     }//GEN-LAST:event_jBLoginActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed

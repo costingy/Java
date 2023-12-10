@@ -9,7 +9,7 @@ package javagrpassignment;
  * @author baigs
  */
 public class OrderHistory extends javax.swing.JFrame {
-
+    private String userID; 
     /**
      * Creates new form OrderHistory
      */
@@ -163,7 +163,7 @@ public class OrderHistory extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        VendorOrderDetails page9 = new VendorOrderDetails();
+        VendorOrderDetails page9 = new VendorOrderDetails(userID);
         
        page9.setVisible(true);
        

@@ -21,14 +21,6 @@ public class VendorOrderDetails extends javax.swing.JFrame {
         this.userID = userID;
     }
 
-    private VendorOrderDetails() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    public void setUserID(String userID){
-    this.userID = userID;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,7 +143,7 @@ public class VendorOrderDetails extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        VendorPage page7 = new VendorPage();
+        VendorPage page7 = new VendorPage(userID);
         page7.setVisible(true);
         
         this.setVisible(false);
@@ -188,7 +180,7 @@ public class VendorOrderDetails extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            new VendorOrderDetails().setVisible(true);
+                new VendorOrderDetails().setVisible(true);
             }
         });
     }
@@ -201,6 +193,4 @@ public class VendorOrderDetails extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
-
-    
 }

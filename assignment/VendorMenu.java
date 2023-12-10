@@ -19,57 +19,16 @@ import java.nio.file.StandardOpenOption;
 public class VendorMenu extends javax.swing.JFrame {
     
     private String userID;
-    /**
-     * Creates new form VendorMenu
-     */
+  
+    private final String filePath = "C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment/menu_details.txt";
+    
     public VendorMenu(String userID) {
         initComponents();
         this.setTitle("Vendor Menu");
         setLocationRelativeTo(null);
-        setUserID(userID);
+        this.userID = userID;
     }
-    
-    public String getUserID() {
-        return userID;
-    }
-    public void setUserID(String userID){
-    this.userID = userID;
-    filterTable(userID);
-    }
-    
-    
-     private void filterTable(String userID) {
-        try {
-            // Specify the path to your text file containing the food menu
-            String filePath = "C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment/menu_details.txt";
 
-            // Read the contents of the file
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-
-            // Clear existing table data
-            DefaultTableModel model = (DefaultTableModel) VendorMenuEditTable.getModel();
-            model.setColumnIdentifiers(new String[]{"Vendor ID", "Vendor Name", "Food Name", "Price"});
-            model.setRowCount(0);
-
-            // Populate the table with file content for the specified userID
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split("\t");
-                if (data.length >= 2 && userID.equals(data[0]))
-                    model.addRow(data);
-            }
-
-            reader.close();
-
-            JOptionPane.showMessageDialog(this, "Menu Loaded");
-
-        } catch (IOException ex) {
-            // Handle any exceptions that may occur during file reading
-            JOptionPane.showMessageDialog(this, "Error loading menu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,13 +79,13 @@ public class VendorMenu extends javax.swing.JFrame {
 
         VendorMenuEditTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Vendor ID", "Vendor Name", "Food Name", "Price"
+                "Vendor ID", "Food Name", "Price"
             }
         ));
         VendorMenuTable.setViewportView(VendorMenuEditTable);
@@ -210,23 +169,24 @@ public class VendorMenu extends javax.swing.JFrame {
 
     private void VendorAddMenubtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendorAddMenubtnActionPerformed
         // TODO add your handling code here:
-           // Get the data from text fields
-    String vendorName = VFoodNametxtFld.getText().trim();
+     String foodName = VFoodNametxtFld.getText().trim();
     String price = VFoodPricetxtFld.getText().trim();
 
     // Validate that both fields are not empty
-    if (vendorName.isEmpty() || price.isEmpty()) {
+    if (foodName.isEmpty() || price.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please enter both Name and Prices.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
     try {
-        // Specify the path to your text file containing the food menu
-        String filePath = "C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment/menu_details.txt";
-
         // Append the new data to the file
-        Files.write(Path.of(filePath), (vendorName + "\tYourStringValue\t" + price + "\n").getBytes(), StandardOpenOption.APPEND);
+        String newData = userID + "\t\t" + foodName + "\t" + price + "\n";
+        Files.write(Path.of(filePath), newData.getBytes(), StandardOpenOption.APPEND);
 
+        // Add the new data to the table directly
+        DefaultTableModel model = (DefaultTableModel) VendorMenuEditTable.getModel();
+        model.addRow(new Object[]{userID, foodName, price});        
+        
         // Display success message
         JOptionPane.showMessageDialog(this, "Menu Updated");
 
@@ -235,14 +195,17 @@ public class VendorMenu extends javax.swing.JFrame {
         VFoodPricetxtFld.setText("");
 
     } catch (IOException ex) {
-        // Handle any exceptions thaat may occur during file writing
+        // Handle any exceptions that may occur during file writing
         JOptionPane.showMessageDialog(this, "Error updating menu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_VendorAddMenubtnActionPerformed
 
+    
+    
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        VendorPage page6 = new VendorPage ();
+        VendorPage page6 = new VendorPage (userID);
         page6.setVisible(true);
         
         this.setVisible(false);
@@ -259,15 +222,16 @@ public class VendorMenu extends javax.swing.JFrame {
 
             // Clear existing table data
             DefaultTableModel model = (DefaultTableModel) VendorMenuEditTable.getModel();
-            model.setColumnIdentifiers(new String[]{"Vendor ID", "Vendor Name", "Food Name", "Price"});
+            model.setColumnIdentifiers(new String[]{"Vendor ID", "Food Name", "Price"});
             model.setRowCount(0);
 
             // Populate the table with file content
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split("\t"); 
-                if (data.length >= 2 && userID.equals(data[0])) 
-                model.addRow(data);
+                if (data.length >= 3 && userID.equals(data[0])) {
+                model.addRow(new Object[]{data[0], data[2], data[3]});
+                }
             }
 
             reader.close();
@@ -319,7 +283,7 @@ public class VendorMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VendorMenu().setVisible(true);
+                new VendorMenu(userID).setVisible(true);
             }
         });
     }
