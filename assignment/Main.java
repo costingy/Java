@@ -4,6 +4,8 @@
  */
 package assignment;
 
+
+
 /**
  *
  * @author chiaj
@@ -12,9 +14,13 @@ public class Main
 {
     public static void main(String[] args)
     {
+  
     Login load = new Login();
     
     load.setVisible(true);
+    
+    
+    
     
   
     }
