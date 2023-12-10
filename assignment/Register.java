@@ -12,16 +12,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.Date;
 
-/**
- *
- * @author chiaj
- */
 public class Register extends javax.swing.JFrame
 {
 
@@ -711,7 +710,12 @@ public class Register extends javax.swing.JFrame
         
         this.topup = JTFtopup.getText();
         try{
-        File f = new File("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\recipt.txt");
+            
+            
+
+        // Construct file path 
+        String filePath = "C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\"+this.id+"recipt.txt";
+        File f = new File(filePath);
         
         FileWriter fw = new FileWriter(f);
         
@@ -733,46 +737,63 @@ public class Register extends javax.swing.JFrame
     
     public String toString()
     {
+    
+        Date date = new Date();
+ 
+
+// Print formatted date
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(date);
+        
         return "name:"+this.name + "\n" +
-               "id:+"+this.id+  "\n" +
-               "topup："+this.topup+"\n";
+               "id:+"+this.id+ "\n" +
+               "topup："+this.topup+"\n"+
+                "Time:"+dateString;
            
     }
     
     private void JBTopupActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_JBTopupActionPerformed
     {//GEN-HEADEREND:event_JBTopupActionPerformed
-        this.name = jTFNameRegister.getText();
-
-        this.id = JTFIDReg1.getText();
-
-        this.password = JTFPasswordReg.getText();
+        String p =(String) model.getValueAt(row, 1);
         
-        this.topup = JTFtopup.getText();
-        
-        
-      try {
-    // Get the current amount from the table model, treat null as 0
-    String currentAmountStr = (String) model.getValueAt(row, 3);
-    double currentAmount = (currentAmountStr != "") ? Double.parseDouble(currentAmountStr) : 0.0;
+        if(p.startsWith("cu"))  
+        {
+                    this.name = jTFNameRegister.getText();
 
-    // Get the top-up amount from the JTextField
-    double topUpAmount = Double.parseDouble(JTFtopup.getText().trim());
+                    this.id = JTFIDReg1.getText();
 
-    // Calculate the new total amount
-    double newAmount = currentAmount + topUpAmount;
+                    this.password = JTFPasswordReg.getText();
 
-    // Update the user information in the table model
-    model.setValueAt(name, row, 0);
-    model.setValueAt(id, row, 1);
-    model.setValueAt(password, row, 2);
-    model.setValueAt(String.valueOf(newAmount), row, 3); // Convert to String before updating model
-} catch (NumberFormatException e) {
-    // Handle the exception gracefully (e.g., show an error message)
-    System.err.println("Error parsing amount: " + e.getMessage());
-}
+                    this.topup = JTFtopup.getText();
 
-              
-         WriteFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt",false);
+
+                  try {
+                // Get the current amount from the table model, treat null as 0
+                String currentAmountStr = (String) model.getValueAt(row, 3);
+                double currentAmount = (currentAmountStr != "") ? Double.parseDouble(currentAmountStr) : 0.0;
+
+                // Get the top-up amount from the JTextField
+                double topUpAmount = Double.parseDouble(JTFtopup.getText().trim());
+
+                // Calculate the new total amount
+                double newAmount = currentAmount + topUpAmount;
+                
+                 DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+                String formatted = decimalFormat.format(newAmount);
+                
+                // Update the user information in the table model
+                model.setValueAt(name, row, 0);
+                model.setValueAt(id, row, 1);
+                model.setValueAt(password, row, 2);
+                model.setValueAt(String.valueOf(formatted), row, 3); // Convert to String before updating model
+            } catch (NumberFormatException e) {
+                // Handle the exception gracefully (e.g., show an error message)
+                System.err.println("Error parsing amount: " + e.getMessage());
+            }
+
+
+                     WriteFiles("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt",false);
+            }
     }//GEN-LAST:event_JBTopupActionPerformed
 
     private void JTFtopupActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_JTFtopupActionPerformed

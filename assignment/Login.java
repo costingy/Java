@@ -6,29 +6,43 @@ package assignment;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame 
 {
-
-    /**
-     * Creates new form Login
-     */
-    public Login()
-    {
-        initComponents();
-        
-            
-        setLocationRelativeTo(null) ;
-        
-       
+    
+    private String loggedInUserID;
+    private final ArrayList<String[]> idPasswordList;
+    private boolean matchFound;
+    
+    private boolean loginComplete;
+    public boolean isLoginComplete() {
+        return loginComplete;
     }
 
+       public static void main(String[] args) {
     
-    
-	
+        java.awt.EventQueue.invokeLater(() -> {
+            Login login = new Login();
+        login.setVisible(true);
+
+        login.jBLogin.addActionListener((evt) -> {
+            String loggedInUserID = login.handleLogin();
+        });
+       });
+    }
+    public Login()
+    {
+        initComponents();          
+        setLocationRelativeTo(null) ;
+        idPasswordList = new ArrayList<>();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,10 +50,8 @@ public class Login extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -61,9 +73,7 @@ public class Login extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 255));
-
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, java.awt.BorderLayout.CENTER);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel9.setBackground(new java.awt.Color(153, 255, 255));
         jPanel9.setLayout(new java.awt.GridLayout(4, 1));
@@ -92,11 +102,8 @@ public class Login extends javax.swing.JFrame
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
-        JTFUserID.setText(" ");
-        JTFUserID.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        JTFUserID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFUserIDActionPerformed(evt);
             }
         });
@@ -136,10 +143,8 @@ public class Login extends javax.swing.JFrame
         jPanel3.setBackground(new java.awt.Color(153, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        JTfPassword.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        JTfPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTfPasswordActionPerformed(evt);
             }
         });
@@ -154,12 +159,9 @@ public class Login extends javax.swing.JFrame
 
         jPanel12.setBackground(new java.awt.Color(153, 255, 255));
 
-        jBLogin.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jBLogin.setText("Login");
-        jBLogin.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jBLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLoginActionPerformed(evt);
             }
         });
@@ -169,12 +171,9 @@ public class Login extends javax.swing.JFrame
 
         jPanel13.setBackground(new java.awt.Color(153, 255, 255));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jButton2.setText("Forgot Password");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -184,7 +183,7 @@ public class Login extends javax.swing.JFrame
 
         jPanel9.add(jPanel6);
 
-        getContentPane().add(jPanel9, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 565, 411));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -201,87 +200,100 @@ public class Login extends javax.swing.JFrame
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jBLoginActionPerformed
     {//GEN-HEADEREND:event_jBLoginActionPerformed
-        String UserID = JTFUserID.getText();
-        
-        String Password = JTfPassword.getText();
-        
-        String passkey = UserID+","+Password ;
-     
-        
-        
-        
-        File f = new File("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt");
-        
-       
-         try (BufferedReader br = new BufferedReader(new FileReader(f))) 
-         {
-            String line;
-            ArrayList<String[]> idPasswordList = new ArrayList<>();
+    String userType = "";
+    String userID = "";
+    String Passkey = JTFUserID.getText() + "," + JTfPassword.getText();
+    
+    File f = new File("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt");
 
-            while ((line = br.readLine()) != null) 
-            {
-                // Split the line using commas as the separator
-                String[] data = line.split(", ");
+    try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+        String line;
 
-                // Ensure that there are at least two elements (id and password)
-                if (data.length >= 2) 
-                {
-                    String id = data[1].trim(); // Assuming id is the second element
-                    String password = data[2].trim(); // Assuming password is the third element
+        while ((line = br.readLine()) != null) {
+            // Split the line using commas as the separator
+            String[] data = line.split(", ");
 
-                    String[] idPasswordPair = {id, password};
-                    idPasswordList.add(idPasswordPair);
-                }
+            // Ensure that there are at least two elements (id and password)
+            if (data.length >= 3) { // Modified to check for at least three elements
+                String id = data[1].trim(); // Assuming id is the second element
+                String password = data[2].trim(); // Assuming password is the third element
+
+                idPasswordList.add(new String[]{id, password});
             }
-
-              // Now idPasswordList contains the id and password pairs
-            boolean matchFound = false;
-            for (String[] pair : idPasswordList)
-            {
-                if (passkey.equals(pair[0] + "," + pair[1])) {
-                    System.out.println("Match found: " + pair[0] + "," + pair[1]);
-                    matchFound = true;
-                    break; // Break out of the loop once a match is found
-                }
-            }
-
-            if (matchFound) {
-
-                if(passkey.startsWith("ad"))
-                {
-
-                AdminPage page = new AdminPage();page.setVisible(true);this.setVisible(false);
-                }
-            } else {
-                System.out.println("Login failed. Invalid username or password.");
-            }
-
-   
-
-    } 
-    catch (IOException e)
-    {
+        }
+    } catch (IOException e) {
         e.printStackTrace();
     }
 
-       
-        
-        
- 
+    for (String[] pair : idPasswordList) {
+        if (Passkey.equals(pair[0] + "," + pair[1])) {
+            matchFound = true;
+            userType = pair[0].substring(0, 2);
+                  if ("vd".equals(userType)) {
+            userID = pair[0];
+        } else {
+            userID = pair[0];
+        }
+        loggedInUserID = userID;
+        break;
+        }
+    }
+        // ... After the loop
+        if (!matchFound) {
+            JOptionPane.showMessageDialog(this, "Invalid login credentials", "Error", JOptionPane.ERROR_MESSAGE);
+            // Display an error message or handle invalid credentials as needed
+        } else {
+            switch (userType) {
+                /**
+                case "cu":
+                    // Open customer page
+                    CustomerPage customerPage = new CustomerPage();
+                    customerPage.setVisible(true);
+                    break;
+                    */
+                case "ad":
+                    // Open admin page
+                    AdminPage adminPage = new AdminPage();
+                    adminPage.setVisible(true);
+                    break;
+                case "dm":
+                    // Open delivery driver page
+                    DDPage deliveryDriverPage = new DDPage();
+                    deliveryDriverPage.setVisible(true);
+                    break;
+                /**
+                case "vd":
+                    // Open vendor page with the user ID
+                    VendorPage vendorPage = new VendorPage();
+                    vendorPage.setUserID(loggedInUserID);
+                    vendorPage.setVisible(true);
+                    break;
+                    */
+                default:
+                    // Handle unknown user type
+                    System.out.println("Unknown user type");
+                    break;
+            }
+           
+            loginComplete = true;
+            
+            this.setVisible(false);
+        }
+    }
+        private String handleLogin() {
+        jBLoginActionPerformed(null);
+        return loggedInUserID;
     }//GEN-LAST:event_jBLoginActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-  
-    
-  
-       
-    
-    
-    
-    
+
+        public String getLoggedInUserID() {
+        return loggedInUserID;
+        }
+
     /**
      * @param args the command line arguments
      */
@@ -292,7 +304,6 @@ public class Login extends javax.swing.JFrame
     private javax.swing.JTextField JTfPassword;
     private javax.swing.JButton jBLogin;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
