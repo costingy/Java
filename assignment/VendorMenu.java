@@ -26,9 +26,50 @@ public class VendorMenu extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Vendor Menu");
         setLocationRelativeTo(null);
-        this.userID = userID;
+        setUserID(userID);
     }
+    
+    public String getUserID() {
+        return userID;
+    }
+    public void setUserID(String userID){
+    this.userID = userID;
+    filterTable(userID);
+    }
+    
+    
+     private void filterTable(String userID) {
+        try {
+            // Specify the path to your text file containing the food menu
+            String filePath = "C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment/menu_details.txt";
 
+            // Read the contents of the file
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
+            // Clear existing table data
+            DefaultTableModel model = (DefaultTableModel) VendorMenuEditTable.getModel();
+            model.setColumnIdentifiers(new String[]{"Vendor ID", "Vendor Name", "Food Name", "Price"});
+            model.setRowCount(0);
+
+            // Populate the table with file content for the specified userID
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split("\t");
+                if (data.length >= 2 && userID.equals(data[0]))
+                    model.addRow(data);
+            }
+
+            reader.close();
+
+            JOptionPane.showMessageDialog(this, "Menu Loaded");
+
+        } catch (IOException ex) {
+            // Handle any exceptions that may occur during file reading
+            JOptionPane.showMessageDialog(this, "Error loading menu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -191,17 +232,17 @@ public class VendorMenu extends javax.swing.JFrame {
 
         // Clear text fields
         VFoodNametxtFld.setText("");
-        VFoodNametxtFld.setText("");
+        VFoodPricetxtFld.setText("");
 
     } catch (IOException ex) {
-        // Handle any exceptions that may occur during file writing
+        // Handle any exceptions thaat may occur during file writing
         JOptionPane.showMessageDialog(this, "Error updating menu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_VendorAddMenubtnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        VendorPage page6 = new VendorPage (userID);
+        VendorPage page6 = new VendorPage ();
         page6.setVisible(true);
         
         this.setVisible(false);
@@ -278,7 +319,7 @@ public class VendorMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VendorMenu(userID).setVisible(true);
+                new VendorMenu().setVisible(true);
             }
         });
     }

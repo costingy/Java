@@ -14,12 +14,16 @@ import javax.swing.JLabel;
 public class VendorPage extends javax.swing.JFrame {
     private String userID;
  
-    public VendorPage(String userID) {
+    public VendorPage() {
         initComponents();
         this.setTitle("Home Page");
         setLocationRelativeTo(null);
-        this.userID = userID;
         }
+    
+    
+    public void setUserID(String userID){
+    this.userID = userID;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,9 +130,9 @@ public class VendorPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         createMenuFile();
               
-        VendorMenu page3 = new VendorMenu(userID);
+        VendorMenu page3 = new VendorMenu("userID");
+        page3.setUserID(userID);
         page3.setVisible(true);
-        
         this.setVisible(false);
     }
       private void createMenuFile() {
@@ -173,7 +177,7 @@ public class VendorPage extends javax.swing.JFrame {
 
     private void VLogOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VLogOutbtnActionPerformed
         // TODO add your handling code here:
-                Login a =new Login();
+        Login a =new Login();
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VLogOutbtnActionPerformed
@@ -224,7 +228,8 @@ public class VendorPage extends javax.swing.JFrame {
             String loggedInUserID = login.getLoggedInUserID();
 
             // Create an instance of VendorPage with the obtained user ID
-            VendorPage vendorPage = new VendorPage(loggedInUserID);
+            VendorPage vendorPage = new VendorPage();
+            vendorPage.setUserID(loggedInUserID); 
             vendorPage.setVisible(true);
     });
 }
