@@ -1,0 +1,3 @@
+vd178888, Rice, 5, Approved
+vd178888, Chicken Curry, 3, Approved
+vd178888, Mee Goreng, 8, Approved

@@ -1,0 +1,28 @@
+cu123456	Yang        	
+ad123456	Jas     	
+dm123456	Ken     
+vd178345	Smitch      
+vd173345	Mitch       
+vd178999	Dave        
+vd178888	Stupid      
+
+vd173345		Fried Chicken	18
+vd173345		Chicken	10
+vd173345		Rice	10
+vd173345		Curry	3
+vd173345		Pizza	15
+vd178999		Submarine	30
+vd178999		Burger	20
+vd178999		Salad	50
+vd178999		Chicken Burger	45
+vd178999		Beef Burger	50
+vd178999		Ceasar Salad	60
+vd178999		Cutlets	80
+null		Chips	12
+vd178999		Fish & Chips	20
+vd178888		Rice	5
+vd178888		Chicken Curry	3
+vd178888		Mee Goreng	8
+vd178888		Nasi Goreng Ayam	12
+vd173345		Steak	8
+vd173345		Fish	10

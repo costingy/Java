@@ -1,0 +1,16 @@
+vd173345, Rice, 10, Rejected
+vd173345, Curry, 3, Rejected
+vd173345, Pizza, 15, Approved
+vd178999, Submarine, 30, Approved
+vd178999, Submarine, 30, Rejected
+vd178999, Burger, 20, Approved
+vd178999, Salad, 50, Rejected
+vd178888, Rice, 5, Approved
+vd178888, Chicken Curry, 3, Approved
+vd178888, Mee Goreng, 8, Approved
+vd178888, Nasi Goreng Ayam, 12, Rejected
+vd173345, Chicken, 10, 
+vd173345, Steak, 8, 
+vd173345, Fish, 10, 
+vd173345, Fish, 10, 
+vd173345, Steak, 8, 

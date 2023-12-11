@@ -1,14 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package assignment;
+
+package javagrpassignment;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.StringTokenizer;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,21 +19,12 @@ public class Login extends javax.swing.JFrame
     private final ArrayList<String[]> idPasswordList;
     private boolean matchFound;
     
-    private boolean loginComplete;
-    public boolean isLoginComplete() {
-        return loginComplete;
-    }
-
        public static void main(String[] args) {
-    
+        // This is the entry point of your programr
+        // You can create an instance of your Login class and make it visible
         java.awt.EventQueue.invokeLater(() -> {
-            Login login = new Login();
-        login.setVisible(true);
-
-        login.jBLogin.addActionListener((evt) -> {
-            String loggedInUserID = login.handleLogin();
+            new Login().setVisible(true);
         });
-       });
     }
     public Login()
     {
@@ -50,8 +39,7 @@ public class Login extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -70,10 +58,11 @@ public class Login extends javax.swing.JFrame
         jPanel12 = new javax.swing.JPanel();
         jBLogin = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 255));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.GridLayout());
 
         jPanel9.setBackground(new java.awt.Color(153, 255, 255));
         jPanel9.setLayout(new java.awt.GridLayout(4, 1));
@@ -102,10 +91,8 @@ public class Login extends javax.swing.JFrame
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
-        JTFUserID.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        JTFUserID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFUserIDActionPerformed(evt);
             }
         });
@@ -145,10 +132,8 @@ public class Login extends javax.swing.JFrame
         jPanel3.setBackground(new java.awt.Color(153, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        JTfPassword.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        JTfPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTfPasswordActionPerformed(evt);
             }
         });
@@ -164,10 +149,8 @@ public class Login extends javax.swing.JFrame
         jPanel12.setBackground(new java.awt.Color(153, 255, 255));
 
         jBLogin.setText("Login");
-        jBLogin.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jBLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLoginActionPerformed(evt);
             }
         });
@@ -176,11 +159,20 @@ public class Login extends javax.swing.JFrame
         jPanel6.add(jPanel12);
 
         jPanel13.setBackground(new java.awt.Color(153, 255, 255));
+
+        jButton2.setText("Forgot Password");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(jButton2);
+
         jPanel6.add(jPanel13);
 
         jPanel9.add(jPanel6);
 
-        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 565, 411));
+        getContentPane().add(jPanel9);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -197,11 +189,11 @@ public class Login extends javax.swing.JFrame
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jBLoginActionPerformed
     {//GEN-HEADEREND:event_jBLoginActionPerformed
-    String userType = "";
+ String userType = "";
     String userID = "";
     String Passkey = JTFUserID.getText() + "," + JTfPassword.getText();
-    
-    File f = new File("C:\\Users\\chiaj\\OneDrive\\Documents\\NetBeansProjects\\Assignment\\src\\assignment\\password.txt");
+
+    File f = new File("C:\\Users\\Yanaal\\Documents\\NetBeansProjects\\javagrpassignment\\src\\javagrpassignment\\password.txt");
 
     try (BufferedReader br = new BufferedReader(new FileReader(f))) {
         String line;
@@ -241,13 +233,11 @@ public class Login extends javax.swing.JFrame
             // Display an error message or handle invalid credentials as needed
         } else {
             switch (userType) {
-             
                 case "cu":
-                   // Open customer page
+                    // Open customer page
                     CustomerPage customerPage = new CustomerPage();
                     customerPage.setVisible(true);
                     break;
-                   
                 case "ad":
                     // Open admin page
                     AdminPage adminPage = new AdminPage();
@@ -258,29 +248,26 @@ public class Login extends javax.swing.JFrame
                     DDPage deliveryDriverPage = new DDPage();
                     deliveryDriverPage.setVisible(true);
                     break;
-            
                 case "vd":
                     // Open vendor page with the user ID
-                    VendorPage vendorPage = new VendorPage();
-                    vendorPage.setUserID(loggedInUserID);
+                    VendorPage vendorPage = new VendorPage(userID);
                     vendorPage.setVisible(true);
                     break;
-                 
                 default:
                     // Handle unknown user type
                     System.out.println("Unknown user type");
                     break;
             }
-           
-            loginComplete = true;
-            
+            // Close the current login page
             this.setVisible(false);
         }
-    }
-        private String handleLogin() {
-        jBLoginActionPerformed(null);
-        return loggedInUserID;
+
     }//GEN-LAST:event_jBLoginActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
+    {//GEN-HEADEREND:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
         public String getLoggedInUserID() {
         return loggedInUserID;
@@ -295,6 +282,7 @@ public class Login extends javax.swing.JFrame
     private javax.swing.JTextField JTFUserID;
     private javax.swing.JTextField JTfPassword;
     private javax.swing.JButton jBLogin;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
