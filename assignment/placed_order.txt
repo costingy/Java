@@ -1,0 +1,7 @@
+vd173345, Rice, 10, 
+vd173345, Curry, 3, 
+vd173345, Pizza, 15, 
+vd178999, Submarine, 30, 
+vd178999, Submarine, 30, 
+vd178999, Burger, 20, 
+vd178999, Salad, 50, 

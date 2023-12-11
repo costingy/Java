@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package javagrpassignment;
+package assignment;
 
 import java.io.*;
 import javax.swing.JLabel;
@@ -127,7 +127,6 @@ public class VendorPage extends javax.swing.JFrame {
               
         VendorMenu page3 = new VendorMenu(userID);
         page3.setVisible(true);
-        
         this.setVisible(false);
     }
       private void createMenuFile() {
@@ -172,7 +171,7 @@ public class VendorPage extends javax.swing.JFrame {
 
     private void VLogOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VLogOutbtnActionPerformed
         // TODO add your handling code here:
-                Login a =new Login();
+        Login a =new Login();
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VLogOutbtnActionPerformed

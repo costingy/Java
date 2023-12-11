@@ -103,16 +103,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Wallet"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CustWalletbtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="CustNotificationbtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Notifications"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CustNotificationbtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="CustMenubtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Menu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CustMenubtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="CustLogOutbtn">
       <Properties>

@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package javagrpassignment;
+
+package assignment;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,7 +20,7 @@ public class Login extends javax.swing.JFrame
     private boolean matchFound;
     
        public static void main(String[] args) {
-        // This is the entry point of your program
+        // This is the entry point of your programr
         // You can create an instance of your Login class and make it visible
         java.awt.EventQueue.invokeLater(() -> {
             new Login().setVisible(true);
@@ -65,7 +62,7 @@ public class Login extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 255));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.GridLayout());
 
         jPanel9.setBackground(new java.awt.Color(153, 255, 255));
         jPanel9.setLayout(new java.awt.GridLayout(4, 1));
@@ -175,7 +172,7 @@ public class Login extends javax.swing.JFrame
 
         jPanel9.add(jPanel6);
 
-        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 565, 411));
+        getContentPane().add(jPanel9);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -196,7 +193,7 @@ public class Login extends javax.swing.JFrame
     String userID = "";
     String Passkey = JTFUserID.getText() + "," + JTfPassword.getText();
 
-    File f = new File("C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment\\password.txt");
+    File f = new File("C:\\Users\\mazya\\OneDrive\\Desktop\\College\\Y2\\Assignment\\src\\assignment\\password.txt");
 
     try (BufferedReader br = new BufferedReader(new FileReader(f))) {
         String line;

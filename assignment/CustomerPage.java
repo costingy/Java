@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package javagrpassignment;
+package assignment;
 
 /**
  *
@@ -15,6 +15,7 @@ public class CustomerPage extends javax.swing.JFrame {
      */
     public CustomerPage() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -58,10 +59,25 @@ public class CustomerPage extends javax.swing.JFrame {
         );
 
         CustWalletbtn.setText("Wallet");
+        CustWalletbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustWalletbtnActionPerformed(evt);
+            }
+        });
 
         CustNotificationbtn.setText("Notifications");
+        CustNotificationbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustNotificationbtnActionPerformed(evt);
+            }
+        });
 
         CustMenubtn.setText("Menu");
+        CustMenubtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustMenubtnActionPerformed(evt);
+            }
+        });
 
         CustLogOutbtn.setText("Log Out");
         CustLogOutbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -108,10 +124,31 @@ public class CustomerPage extends javax.swing.JFrame {
 
     private void CustLogOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustLogOutbtnActionPerformed
         // TODO add your handling code here:
-                Login a =new Login();
+        Login a =new Login();
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CustLogOutbtnActionPerformed
+
+    private void CustMenubtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustMenubtnActionPerformed
+        // TODO add your handling code here:
+        Customer_Menu page31 = new Customer_Menu();
+        page31.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_CustMenubtnActionPerformed
+
+    private void CustWalletbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustWalletbtnActionPerformed
+        // TODO add your handling code here:
+        Customer_Wallet page31 = new Customer_Wallet();
+        page31.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_CustWalletbtnActionPerformed
+
+    private void CustNotificationbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustNotificationbtnActionPerformed
+        // TODO add your handling code here:
+        Customer_Notification page31 = new Customer_Notification();
+        page31.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_CustNotificationbtnActionPerformed
 
     /**
      * @param args the command line arguments

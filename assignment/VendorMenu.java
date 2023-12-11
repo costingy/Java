@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package javagrpassignment;
+package assignment;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,7 +20,7 @@ public class VendorMenu extends javax.swing.JFrame {
     
     private String userID;
   
-    private final String filePath = "C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment/menu_details.txt";
+    private final String filePath = "C:\\Users\\mazya\\OneDrive\\Desktop\\College\\Y2\\Assignment\\src\\assignment\\menu_details.txt";
     
     public VendorMenu(String userID) {
         initComponents();
@@ -172,7 +172,6 @@ public class VendorMenu extends javax.swing.JFrame {
      String foodName = VFoodNametxtFld.getText().trim();
     String price = VFoodPricetxtFld.getText().trim();
 
-    // Validate that both fields are not empty
     if (foodName.isEmpty() || price.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please enter both Name and Prices.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
@@ -215,7 +214,7 @@ public class VendorMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             // Specify the path to your text file containing the food menu
-            String filePath = "C:\\Users\\baigs\\OneDrive\\Documents\\NetBeansProjects\\JavaGrpAssignment\\src\\javagrpassignment/menu_details.txt";
+            String filePath = "C:\\Users\\mazya\\OneDrive\\Desktop\\College\\Y2\\Assignment\\src\\assignment/menu_details.txt";
 
             // Read the contents of the file
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
