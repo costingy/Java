@@ -2,19 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.registrationpage;
+package assignment;
 
 /**
  *
- * @author Yanaal
+ * @author chiaj
  */
-public class DDPage extends javax.swing.JFrame {
+public class DDPage extends javax.swing.JFrame
+{
 
-    /**
-     * Creates new form DDPage
-     */
-    public DDPage() {
+  
+    public DDPage()
+    {
         initComponents();
+          setLocationRelativeTo(null) ;
     }
 
     /**
@@ -24,83 +25,115 @@ public class DDPage extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
-        jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
-        DDlbl = new javax.swing.JLabel();
-        ViewTaskbtn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         DDRevenueBtn = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        ViewTaskbtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        DDlbl = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         DDLogOutbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 0));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setLayout(new java.awt.GridLayout(0, 1));
+
+        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
+
+        DDRevenueBtn.setText("Check Revenue");
+        DDRevenueBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                DDRevenueBtnActionPerformed(evt);
+            }
+        });
+        jPanel3.add(DDRevenueBtn);
+
+        jPanel1.add(jPanel3);
+
+        jPanel5.setBackground(new java.awt.Color(153, 255, 255));
+
+        ViewTaskbtn.setText("View Tasks");
+        ViewTaskbtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                ViewTaskbtnActionPerformed(evt);
+            }
+        });
+        jPanel5.add(ViewTaskbtn);
+
+        jPanel1.add(jPanel5);
+
+        jPanel2.setBackground(new java.awt.Color(255, 153, 51));
 
         DDlbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         DDlbl.setText("Delivery Driver");
+        jPanel2.add(DDlbl);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
-                .addComponent(DDlbl)
-                .addGap(160, 160, 160))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(DDlbl)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        ViewTaskbtn.setText("View Tasks");
-
-        DDRevenueBtn.setText("Check Revenue");
+        jPanel4.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         DDLogOutbtn.setText("Log Out");
+        DDLogOutbtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                DDLogOutbtnActionPerformed(evt);
+            }
+        });
+        jPanel4.add(DDLogOutbtn);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DDRevenueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ViewTaskbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(DDLogOutbtn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(ViewTaskbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(DDRevenueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(DDLogOutbtn)
-                .addGap(19, 19, 19))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ViewTaskbtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ViewTaskbtnActionPerformed
+    {//GEN-HEADEREND:event_ViewTaskbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ViewTaskbtnActionPerformed
+
+    private void DDLogOutbtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_DDLogOutbtnActionPerformed
+    {//GEN-HEADEREND:event_DDLogOutbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DDLogOutbtnActionPerformed
+
+    private void DDRevenueBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_DDRevenueBtnActionPerformed
+    {//GEN-HEADEREND:event_DDRevenueBtnActionPerformed
+          DDDashboard demo = new DDDashboard("revenue dashboard", "Income");
+            demo.pack();
+            demo.setVisible(true);
+            this.setVisible(false);
+    }//GEN-LAST:event_DDRevenueBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+   public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -132,12 +165,16 @@ public class DDPage extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DDLogOutbtn;
     private javax.swing.JButton DDRevenueBtn;
     private javax.swing.JLabel DDlbl;
     private javax.swing.JButton ViewTaskbtn;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }
